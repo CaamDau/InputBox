@@ -10,7 +10,7 @@
 import UIKit
 
 //@IBDesignable
-public class CD_TextView: UIView {
+public class TextView: UIView {
     convenience public init() {
         self.init(frame: .zero)
     }
@@ -203,7 +203,7 @@ public class CD_TextView: UIView {
     }
 }
 
-extension CD_TextView {
+extension TextView {
     @available(iOS 10.0, *)
     public struct Interact {
         public var blockShouldInteractTextAttachment:((_ text: UITextView, _ attachment:NSTextAttachment, _ range: NSRange, _ interaction: UITextItemInteraction) -> Bool)?
@@ -212,7 +212,7 @@ extension CD_TextView {
 }
 
 
-extension CD_TextView {
+extension TextView {
     func makeUI() {
         self.cd
             .add(placeholderView)
@@ -244,7 +244,7 @@ extension CD_TextView {
     }
 }
 
-extension CD_TextView: UITextViewDelegate {
+extension TextView: UITextViewDelegate {
     public func textViewDidChange(_ textView: UITextView) {
         placeholderView.cd.isHidden(!textView.text!.isEmpty)
         blockEditing?(textView, .editingChanged)
@@ -280,7 +280,7 @@ extension CD_TextView: UITextViewDelegate {
 
 
 //MARK:--- UITextView ----------
-public extension CaamDau where Base: CD_TextView {
+public extension CaamDau where Base: TextView {
     
     @discardableResult
     func delegate(_ d:UITextViewDelegate? = nil) -> CaamDau {

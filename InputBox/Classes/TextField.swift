@@ -10,7 +10,7 @@
 import UIKit
 
 //@IBDesignable
-public class CD_TextField: UIView {
+public class TextField: UIView {
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -170,7 +170,7 @@ public class CD_TextField: UIView {
     
     open var blockShouldChangeCharacters:((_ textField: UITextField, _ range: NSRange, _ string: String) -> Bool)?
 }
-extension CD_TextField: UITextFieldDelegate {
+extension TextField: UITextFieldDelegate {
     @objc func textChange(_ sender: UITextField) {
         btn_placeholder.cd.isHidden(!sender.text!.isEmpty)
         blockEditing?(sender, UIControl.Event.editingChanged)
@@ -199,7 +199,7 @@ extension CD_TextField: UITextFieldDelegate {
     }
 }
 
-extension CD_TextField {
+extension TextField {
     func makeUI() {
         self.cd
             .add(btn_left)
@@ -264,7 +264,7 @@ extension CD_TextField {
     
     
 }
-extension CD_TextField {
+extension TextField {
     func updateLineColor() {
         line_top.cd.background(_colorLine)
         line_bottom.cd.background(_colorLine)

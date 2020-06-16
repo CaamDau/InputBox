@@ -10,25 +10,25 @@
 import UIKit
 
 
-extension CD_InputBoxPopping {
+extension InputBoxPopping {
     public struct Model {
         ///
         
     }
 }
 
-extension CD_InputBoxPopping {
+extension InputBoxPopping {
     @discardableResult
     public class func show(_ placeholder:String = "请输入",
                            cache key:String = "",
-                           custom:((CD_InputBoxPopping)->Void)? = nil,
-                           completion:((String)->Void)? = nil) -> CD_InputBoxPopping {
-        let list = CD.window?.subviews.filter{$0.isKind(of: CD_InputBoxPopping.self)}.compactMap{$0}
+                           custom:((InputBoxPopping)->Void)? = nil,
+                           completion:((String)->Void)? = nil) -> InputBoxPopping {
+        let list = CD.window?.subviews.filter{$0.isKind(of: InputBoxPopping.self)}.compactMap{$0}
         if let list = list, !list.isEmpty {
-            return list.first as! CD_InputBoxPopping
+            return list.first as! InputBoxPopping
         }
-        let view = CD_InputBoxPopping.cd_loadNib(from: "CaamDauInputBox")?.first as! CD_InputBoxPopping
-        //let view = CD_InputBoxPopping.cd_loadNib()?.first as! CD_InputBoxPopping
+        let view = InputBoxPopping.cd_loadNib(from: "CaamDauInputBox")?.first as! InputBoxPopping
+        //let view = InputBoxPopping.cd_loadNib()?.first as! InputBoxPopping
         view.placeholder = placeholder
         view.cachekey = key
         view.completion = completion
@@ -40,7 +40,7 @@ extension CD_InputBoxPopping {
 }
 
 
-public class CD_InputBoxPopping: UIView {
+public class InputBoxPopping: UIView {
     @IBOutlet open weak var view_bg: UIView!
     @IBOutlet open weak var stack_bg: UIStackView!
     @IBOutlet open weak var stack_bg_L: NSLayoutConstraint!
@@ -62,7 +62,7 @@ public class CD_InputBoxPopping: UIView {
     @IBOutlet open weak var btn_titleRight: UIButton!
     @IBOutlet open weak var btn_titleRightWidth: NSLayoutConstraint!
     
-    @IBOutlet open weak var text_view: CD_TextView!
+    @IBOutlet open weak var text_view: TextView!
     @IBOutlet open weak var btn_textRight: UIButton!
     @IBOutlet open weak var btn_textRightWidth: NSLayoutConstraint!
     @IBOutlet open weak var btn_textRightHeight: NSLayoutConstraint!
@@ -78,7 +78,7 @@ public class CD_InputBoxPopping: UIView {
     open var _maxTextNum:Int = 1000
     open var _minTextHeight:CGFloat = 40
     open var _maxTextHeight:CGFloat = 120
-    var keyboard:CD_Keyboard?
+    var keyboard:Keyboard?
     public override func awakeFromNib() {
         super.awakeFromNib()
         /// 默认情况下
@@ -104,7 +104,7 @@ public class CD_InputBoxPopping: UIView {
                 break
             }
         }
-        keyboard = CD_Keyboard(view: view_bg)
+        keyboard = Keyboard(view: view_bg)
         text_view.textContainerInset = UIEdgeInsets(t: 10, l: 5, b: 10, r: 5)
         text_view.placeColor = UIColor.cd_hex("d3", dark:"f0")
         text_view.textView.backgroundColor = UIColor.cd_hex("f0f0f0").cd_alpha(0.8)
@@ -124,7 +124,7 @@ public class CD_InputBoxPopping: UIView {
     
     var cachekey:String = "" {
         didSet{
-            text_view.text = CD_InputBox.Cache.read(cachekey)
+            text_view.text = InputBox.Cache.read(cachekey)
         }
     }
     var completion:((String)->Void)?
@@ -147,12 +147,12 @@ public class CD_InputBoxPopping: UIView {
 
 
 
-extension CD_InputBoxPopping {
+extension InputBoxPopping {
     func textEditingChanged(){
         if text_view.text.count > _maxTextNum {
             text_view.text = text_view.text[0..<_maxTextNum]
         }
-        CD_InputBox.Cache.save(cachekey, value: text_view.text)
+        InputBox.Cache.save(cachekey, value: text_view.text)
         self.changeTextViewHeight()
     }
     func changeTextViewHeight(){

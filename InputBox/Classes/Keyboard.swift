@@ -9,7 +9,7 @@
 
 import Foundation
 import UIKit
-public class CD_Keyboard {
+public class Keyboard {
     weak var view:UIView?
     var observers:[NSObjectProtocol] = []
     open var willShowBeforeHandle:(() -> Void)?
@@ -45,7 +45,7 @@ public class CD_Keyboard {
 }
 
 
-extension CD_Keyboard {
+extension Keyboard {
     private func makeNotification() {
         do{
             let ob = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](n) in
